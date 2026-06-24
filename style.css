@@ -1,0 +1,25 @@
+window {
+    background-color: #000080;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: Monospace;
+}
+
+button {
+    background: cyan;
+    border-color:#000080;
+    color:#000080;
+}
+
+
+button:hover {
+    background: darkslategrey;
+    border-color: magenta;
+    color: white;
+}
+
+entry {
+    background: cyan;
+    border-color:#000080;
+    color:#000080;
+}
