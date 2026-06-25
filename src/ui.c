@@ -78,7 +78,7 @@ on_request_calc(GtkEditable *editable, gpointer user_data)
         b_x = 0;
     }
 
-    guint selected_material = gtk_drop_down_get_selected(w->dd_material);
+    guint selected_material = gtk_drop_down_get_selected(GTK_DROP_DOWN(w->dd_material));
     Sigmadop sigmadop = sigma_from_index(selected_material);
     ShaftResult result;
     calculate_shaft(p_kw, n_rpm, sigmadop, gear_x, gear_d, alpha, a_x, b_x, &result);
