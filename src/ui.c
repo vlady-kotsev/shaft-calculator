@@ -80,14 +80,14 @@ on_request_calc(GtkEditable *editable, gpointer user_data)
 
     guint selected_material = gtk_drop_down_get_selected(w->dd_material);
     Sigmadop sigmadop = sigma_from_index(selected_material);
-    ShaftResult *result = malloc(sizeof(*result));
-    calculate_shaft(p_kw, n_rpm, sigmadop, gear_x, gear_d, alpha, a_x, b_x, result);
+    ShaftResult result;
+    calculate_shaft(p_kw, n_rpm, sigmadop, gear_x, gear_d, alpha, a_x, b_x, &result);
 
-    SET_RESULT(mv, "Mv", w, result->mv);
-    SET_RESULT(mh, "Mh", w, result->mh);
-    SET_RESULT(mb, "Mb", w, result->mb);
-    SET_RESULT(meq, "Meq", w, result->meq);
-    SET_RESULT(d, "D", w, result->d);
+    SET_RESULT(mv, "Mv", w, result.mv);
+    SET_RESULT(mh, "Mh", w, result.mh);
+    SET_RESULT(mb, "Mb", w, result.mb);
+    SET_RESULT(meq, "Meq", w, result.meq);
+    SET_RESULT(d, "D", w, result.d);
 }
 
 void on_activate(GtkApplication *app, gpointer user_data)

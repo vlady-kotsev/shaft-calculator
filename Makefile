@@ -5,6 +5,10 @@ CFLAGS  = -Wall -Wextra -std=c23 -pedantic \
           $(DEBUG)
 LDFLAGS = $(shell pkg-config --libs gtk4)
 
+ifeq ($(OS),Windows_NT)
+	LDFLAGS += -mwindows
+endif
+
 BINARY  = main
 SOURCES = $(shell find src -name '*.c')
 
