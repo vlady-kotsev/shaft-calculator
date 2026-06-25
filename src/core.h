@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+
 #define APP_NAME "Shaft Calculator"
 
 typedef enum
@@ -20,7 +24,5 @@ typedef struct
     double meq;
     double d;
 } ShaftResult;
-
-
 
 void calculate_shaft(double p_kw, double n_rpm, Sigmadop material, double gear_x, double gear_d, double alpha, double a_x, double b_x, ShaftResult *result);
