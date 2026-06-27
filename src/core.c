@@ -25,11 +25,15 @@ void calculate_shaft(double p_kw, double n_rpm, Sigmadop material, double gear_x
 
     double d = pow((32 * meq) / (M_PI * material), 1.0 / 3.0);
 
+    double optimal_d = ceil(d / 5.0) * 5;
+
     *result = (ShaftResult){
-        .d = d,
+        .mt = mt,
+        .ft = ft,
+        .fr = fr,
         .mb = mb,
-        .mv = mv,
-        .mh = mh,
         .meq = meq,
+        .min_d = d,
+        .optimal_d = optimal_d
     };
 }

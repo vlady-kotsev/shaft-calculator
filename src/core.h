@@ -18,11 +18,13 @@ typedef enum
 
 typedef struct
 {
-    double mv;
-    double mh;
+    double mt;
+    double ft;
+    double fr;
     double mb;
     double meq;
-    double d;
+    double min_d;
+    double optimal_d;
 } ShaftResult;
 
 void calculate_shaft(double p_kw, double n_rpm, Sigmadop material, double gear_x, double gear_d, double alpha, double a_x, double b_x, ShaftResult *result);

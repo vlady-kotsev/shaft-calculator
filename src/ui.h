@@ -1,6 +1,10 @@
 #pragma once
 #include <gtk/gtk.h>
 #include "core.h"
+#include "style.h"
+
+#define W_WIDTH 960
+#define W_HEIGHT 400
 
 typedef struct
 {
@@ -34,11 +38,27 @@ typedef struct
 
     // Outputs
     GtkWidget *result_label;
-    GtkWidget *result_label_mv;
-    GtkWidget *result_label_mh;
+
+    GtkWidget *result_label_mt_label;
+    GtkWidget *result_label_mt;
+
+    GtkWidget *result_label_ft_label;
+    GtkWidget *result_label_ft;
+
+    GtkWidget *result_label_fr_label;
+    GtkWidget *result_label_fr;
+
+    GtkWidget *result_label_mb_label;
     GtkWidget *result_label_mb;
+
+    GtkWidget *result_label_meq_label;
     GtkWidget *result_label_meq;
+
+    GtkWidget *result_label_d_label;
     GtkWidget *result_label_d;
+
+    GtkWidget *result_label_optimal_d_label;
+    GtkWidget *result_label_optimal_d;
 
     GtkWidget *button;
 } AppWidgets;
@@ -58,19 +78,27 @@ void on_activate(GtkApplication *app, gpointer user_data);
         gtk_box_append(GTK_BOX(PARENT_BOX), FIELD##_box);                   \
     } while (false)
 
-#define PREPARE_RESULT_FIELD(FIELD, LABEL, W, PARENT_BOX)             \
-    do                                                                \
-    {                                                                 \
-        W->result_label_##FIELD = gtk_label_new(LABEL ": 0");         \
-        gtk_label_set_xalign(GTK_LABEL(W->result_label_##FIELD), 0);  \
-        gtk_widget_set_hexpand(W->result_label_##FIELD, TRUE);        \
-        gtk_box_append(GTK_BOX(PARENT_BOX), W->result_label_##FIELD); \
+#define PREPARE_RESULT_FIELD(FIELD, LABEL, W, PARENT_BOX)                                   \
+    do                                                                                      \
+    {                                                                                       \
+        GtkWidget *result_label_box_##FIELD = gtk_box_new(GTK_ORIENTATION_VERTICAL, 4);     \
+        gtk_widget_set_hexpand(result_label_box_##FIELD, TRUE);                             \
+        gtk_widget_add_css_class(result_label_box_##FIELD, "result-box");                   \
+        W->result_label_##FIELD##_label = gtk_label_new(LABEL);                             \
+        gtk_widget_set_halign(W->result_label_##FIELD##_label, GTK_ALIGN_CENTER);           \
+        W->result_label_##FIELD = gtk_label_new("0");                                       \
+        gtk_widget_set_halign(W->result_label_##FIELD, GTK_ALIGN_CENTER);                   \
+        gtk_label_set_xalign(GTK_LABEL(W->result_label_##FIELD), 0.5);                      \
+                                                                                            \
+        gtk_box_append(GTK_BOX(result_label_box_##FIELD), W->result_label_##FIELD##_label); \
+        gtk_box_append(GTK_BOX(result_label_box_##FIELD), W->result_label_##FIELD);         \
+        gtk_box_append(GTK_BOX(PARENT_BOX), result_label_box_##FIELD);                      \
     } while (false)
 
-#define SET_RESULT(FIELD, LABEL, W, RES)                             \
+#define SET_RESULT(FIELD, W, RES)                                    \
     do                                                               \
     {                                                                \
-        char *msg = g_strdup_printf(LABEL ": %g", RES);              \
+        char *msg = g_strdup_printf("%g", RES);                      \
         gtk_label_set_text(GTK_LABEL(W->result_label_##FIELD), msg); \
         g_free(msg);                                                 \
     } while (false)

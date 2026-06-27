@@ -11,10 +11,11 @@ endif
 
 BINARY  = main
 SOURCES = $(shell find src -name '*.c')
+HEADERS = $(shell find src -name '*.h')
 
 default: $(BINARY)
 
-$(BINARY): $(SOURCES)
+$(BINARY): $(SOURCES) $(HEADERS)
 	$(CC) $(CFLAGS) $(SOURCES) -o $@ $(LDFLAGS)
 
 rund: $(BINARY)
